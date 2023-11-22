@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PoisService } from 'src/app/services/pois.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
     private veiculosService: VeiculosService,
     private poisService: PoisService
   ) {
-    this.maxDate = new Date(Date.now());
+    this.maxDate = new Date(Date.now())
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   private getPois(): void {
     this.poisService.getPois().subscribe((data) => {
-
+      this.pontos = data  
     })
   }
 

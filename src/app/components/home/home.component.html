@@ -14,17 +14,21 @@
           <mat-form-field appearance="outline">
             <mat-label>Selecione um veículo</mat-label>
             <mat-select>
-              <mat-option>
-                Teste
+              <mat-option *ngFor="let placa of placas" [value]="placa">
+                {{placa}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </td>
         <td>
-          <button mat-raised-button class="consult-button">Consultar</button>
+          <button mat-raised-button color="primary" class="me-2">Consultar</button>
         </td>
       </tr>
 
     </table>
   </form>
-</mat-card>
+</mat-card> 
+
+<div class="table">
+  <app-tabela-tempo-veiculo></app-tabela-tempo-veiculo>
+</div>
