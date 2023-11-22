@@ -1,0 +1,30 @@
+<mat-card class="content">
+  <form>
+    <table class="example-full-width">
+      <tr>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Data</mat-label>
+            <input matInput>
+            <mat-datepicker-toggle matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Selecione um veículo</mat-label>
+            <mat-select>
+              <mat-option>
+                teste
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-raised-button color="primary">Consultar</button>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+</mat-card>
