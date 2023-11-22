@@ -5,8 +5,8 @@
         <td>
           <mat-form-field appearance="outline">
             <mat-label>Data</mat-label>
-            <input matInput>
-            <mat-datepicker-toggle matSuffix></mat-datepicker-toggle>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" name="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </td>
@@ -15,7 +15,7 @@
             <mat-label>Selecione um veículo</mat-label>
             <mat-select>
               <mat-option>
-                teste
+                
               </mat-option>
             </mat-select>
           </mat-form-field>

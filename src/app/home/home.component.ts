@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  maxDate: Date;
+
+  constructor(){
+    this.maxDate = new Date(Date.now());
+  }
+
 }
