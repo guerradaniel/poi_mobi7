@@ -14,8 +14,11 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { VeiculosService } from './services/veiculos.service';
+import { HttpClientModule } from '@angular/common/http';
+import { PoisService } from './services/pois.service';
 
 @NgModule({
   declarations: [
@@ -36,10 +39,13 @@ import { HomeComponent } from './home/home.component';
     MatButtonModule,
     MatTableModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    VeiculosService,
+    PoisService
   ],
   bootstrap: [AppComponent]
 })
