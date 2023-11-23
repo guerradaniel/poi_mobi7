@@ -14,5 +14,4 @@ export class FormatoPeriodoPipe implements PipeTransform {
     return `${ value.days !== 0 ? `${days}, ` : `` } ${ value.hours !== 0 ? `${hours}, ` : `` }
             ${ value.minutes !== 0 ? `${minutes}, ` : `` } ${ value.seconds !== 0 ? `${seconds}. ` : `` }`;
   }
-
 }

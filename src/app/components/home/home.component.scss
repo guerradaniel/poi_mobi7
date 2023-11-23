@@ -5,36 +5,19 @@
 
 td {
   padding-right: 30px;
-
   .mat-raised-button {
     margin-bottom: 13px;
   }
-
 }
 
-.toolbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
+.table, .content {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: #182c42; 
-  color: white;
-  font-weight: 900;
-}
-
-.toolbar img {
-  height: 150px;
-  margin: 0 30px;
 }
 
 .content {
-  display: flex;
   margin: 82px auto 32px;
   padding: 0 16px;
   max-width: 90vw;
-  flex-direction: column;
-  align-items: center;
 }

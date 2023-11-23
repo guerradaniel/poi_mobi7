@@ -1,5 +1,4 @@
 <mat-card class="content">
-  <form>
     <table class="example-full-width">
       <tr>
         <td>
@@ -14,6 +13,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Selecione um veículo</mat-label>
             <mat-select [(value)]="carroEscolhido">
+              <mat-option>Todos</mat-option>
               <mat-option *ngFor="let placa of placas" [value]="placa">
                 {{placa}}
               </mat-option>
@@ -24,11 +24,11 @@
           <button mat-raised-button color="primary" (click)="consultar()">Consultar</button>
         </td>
       </tr>
-
     </table>
-  </form>
-</mat-card> 
+</mat-card>
 
-<div class="table" *ngFor="let veiculo of veiculoPorPosicao">
-  <app-tabela-tempo-veiculo [tracking]="filtroTabela(veiculo.placa)"></app-tabela-tempo-veiculo>
+<div *ngIf="trackingList.length !== 0">
+  <div class="table" *ngFor="let veiculo of veiculoPorPosicao">
+    <app-tabela-tempo-veiculo [tracking]="filtroTabela(veiculo.placa)"></app-tabela-tempo-veiculo>
+  </div>
 </div>

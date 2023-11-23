@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     private poisService: PoisService,
     private converteData: ConverteDataPipe,
   ) {
-    this.maxDate = new Date(Date.now())
+    this.maxDate = new Date(Date.now());
   }
 
   ngOnInit(): void {
@@ -45,17 +45,17 @@ export class HomeComponent implements OnInit {
 
   private getPOI(): void {
     this.poisService.getPOI().subscribe((data) => {
-      this.pontos = data
+      this.pontos = data;
     })
   }
 
   consultar(): void {
     this.veiculoPorPosicao = [];
-    this.getPosicaoVeiculo(this.carroEscolhido || undefined, this.data)
+    this.getPosicaoVeiculo(this.carroEscolhido || undefined, this.data);
   }
 
-  public filtroTabela(placa: string) {
-    return this.trackingList.filter(tracking => tracking.placa === placa)
+  public filtroTabela(placa: string): Array<string>{
+    return this.trackingList.filter(tracking => tracking.placa === placa);
   }
 
   private getPosicaoVeiculo(placa?: string, data?: Date): void {
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  obterPOI() {
+  obterPOI(): void{
     this.veiculoPorPosicao.forEach(veiculos => {
       this.pontos.forEach((poi) => {
         this.posicaoTracked = [];
@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  private tracking(placa: string, poiName: string, posicoes: Array<any>) {
+  private tracking(placa: string, poiName: string, posicoes: Array<any>): void{
     this.trackingList.push({
       placa: placa,
       nomePoi: poiName,
@@ -118,16 +118,16 @@ export class HomeComponent implements OnInit {
 
   private posicoesMatch(latitude: number, longitude: number, latPOI: number, lonPOI: number, raio: number): boolean {
     let posicaoVeiculo = { lat: latitude, lon: longitude };
-    let POIs = { lat: latPOI, lon: lonPOI }
+    let POIs = { lat: latPOI, lon: lonPOI };
     let distance = haversine(posicaoVeiculo, POIs);
     return distance <= raio;
   }
 
-  private periodoPOI(inicio: Date, fim: Date) {
+  private periodoPOI(inicio: Date, fim: Date): void{
     return this.calculoTempo(inicio, fim);
   }
 
-  private calculoTempo(dataInicio: Date, dataFim: Date) {
+  private calculoTempo(dataInicio: Date, dataFim: Date): void{
     let delta: number = Math.abs(new Date(dataFim).getTime() - new Date(dataInicio).getTime()) / 1000;
     return [
       ['days', 24 * 60 * 60],
