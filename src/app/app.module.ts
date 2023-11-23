@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PoisService } from './services/pois.service';
 import { TabelaTempoVeiculoComponent } from './components/home/tabela-tempo-veiculo/tabela-tempo-veiculo.component';
 import { ConverteDataPipe } from './pipes/converte-data.pipe';
+import { FormatoPeriodoPipe } from './pipes/formato-periodo.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ConverteDataPipe } from './pipes/converte-data.pipe';
     HeaderComponent,
     HomeComponent,
     TabelaTempoVeiculoComponent,
-    ConverteDataPipe
+    ConverteDataPipe,
+    FormatoPeriodoPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { ConverteDataPipe } from './pipes/converte-data.pipe';
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     VeiculosService,
     PoisService,
-    ConverteDataPipe
+    ConverteDataPipe,
+    FormatoPeriodoPipe
   ],
   bootstrap: [AppComponent]
 })
