@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PontoInteresseModel } from '../models/ponto-interesse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class PoisService {
     private http: HttpClient
   ) { }
 
-  public getPois(): Observable<Array<any>> {
-    return this.http.get<Array<any>>(`${this.URL_API}/pois`);
+  public getPOI(): Observable<Array<PontoInteresseModel>> {
+    return this.http.get<Array<PontoInteresseModel>>(`${this.URL_API}/pois`);
   }
 }

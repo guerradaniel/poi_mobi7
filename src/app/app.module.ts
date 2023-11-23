@@ -20,13 +20,15 @@ import { VeiculosService } from './services/veiculos.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PoisService } from './services/pois.service';
 import { TabelaTempoVeiculoComponent } from './components/home/tabela-tempo-veiculo/tabela-tempo-veiculo.component';
+import { ConverteDataPipe } from './pipes/converte-data.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    TabelaTempoVeiculoComponent
+    TabelaTempoVeiculoComponent,
+    ConverteDataPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { TabelaTempoVeiculoComponent } from './components/home/tabela-tempo-veic
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     VeiculosService,
-    PoisService
+    PoisService,
+    ConverteDataPipe
   ],
   bootstrap: [AppComponent]
 })
