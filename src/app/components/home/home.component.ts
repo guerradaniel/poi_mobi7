@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
     this.getPosicaoVeiculo(this.carroEscolhido || undefined, this.data);
   }
 
-  public filtroTabela(placa: string): Array<PosicaoTabelaModel>{
+  public filtroTabela(placa: string): Array<PosicaoTabelaModel> {
     return this.trackingList.filter(tracking => tracking.placa === placa);
   }
 
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  obterPOI(): void{
+  obterPOI(): void {
     this.veiculoPorPosicao.forEach(veiculos => {
       this.pontos.forEach((poi) => {
         this.posicaoTracked = [];
@@ -106,7 +106,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  private tracking(placa: string, poiName: string, posicoes: Array<PosicaoModel>): void{
+  private posicoesMatch(latitude: number, longitude: number, latPOI: number, lonPOI: number, raio: number): boolean {
+    let posicaoVeiculo = { lat: latitude, lon: longitude };
+    let POIs = { lat: latPOI, lon: lonPOI };
+    let distance = haversine(posicaoVeiculo, POIs);
+    return distance <= raio;
+  }
+
+  private tracking(placa: string, poiName: string, posicoes: Array<PosicaoModel>): void {
     this.trackingList.push({
       placa: placa,
       nomePoi: poiName,
@@ -117,24 +124,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private posicoesMatch(latitude: number, longitude: number, latPOI: number, lonPOI: number, raio: number): boolean {
-    let posicaoVeiculo = { lat: latitude, lon: longitude };
-    let POIs = { lat: latPOI, lon: lonPOI };
-    let distance = haversine(posicaoVeiculo, POIs);
-    return distance <= raio;
-  }
 
-  private periodoPOI(inicio: Date, fim: Date): Date{
+
+  private periodoPOI(inicio: Date, fim: Date): Date {
     return this.calculoTempo(inicio, fim);
   }
 
-  private calculoTempo(dataInicio: Date, dataFim: Date): Date{
+  private calculoTempo(dataInicio: Date, dataFim: Date): Date {
     let delta: number = Math.abs(new Date(dataFim).getTime() - new Date(dataInicio).getTime()) / 1000;
     return [
       ['days', 24 * 60 * 60],
       ['hours', 60 * 60],
       ['minutes', 60],
       ['seconds', 1]
-    ].reduce((acc: any, [key, value]) => (acc[key] = key == 'seconds' ? (Math.floor(delta / Number(value)) >= 1 ? Math.floor(delta / Number(value)) : 1) : Math.floor(delta / Number(value)), delta -= acc[key] * Number(value), acc), {});
+    ].reduce((acc: any, [key, value]) => (
+      acc[key] = key == 'seconds' ?
+        (Math.floor(delta / Number(value)) >= 1 ? Math.floor(delta / Number(value)) : 1) 
+        : Math.floor(delta / Number(value)), delta -= acc[key] * Number(value), acc), {});
   }
 }
