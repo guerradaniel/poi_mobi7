@@ -6,6 +6,7 @@ import { PoisService } from 'src/app/services/pois.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 
 import haversine from 'haversine-distance'
+import { PosicaoTabelaModel, VeiculoPosicaoModel } from 'src/app/models/posicao-tabela.model';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +19,8 @@ export class HomeComponent implements OnInit {
   maxDate: Date;
   placas: Array<string> = [];
   pontos: Array<PontoInteresseModel> = [];
-  veiculoPorPosicao: Array<any> = [];
-  trackingList: Array<any> = [];
+  veiculoPorPosicao: Array<VeiculoPosicaoModel> = [];
+  trackingList: Array<PosicaoTabelaModel> = [];
   carroEscolhido: string = "";
   posicaoTracked: Array<PosicaoModel> = [];
 
@@ -54,7 +55,7 @@ export class HomeComponent implements OnInit {
     this.getPosicaoVeiculo(this.carroEscolhido || undefined, this.data);
   }
 
-  public filtroTabela(placa: string): Array<string>{
+  public filtroTabela(placa: string): Array<PosicaoTabelaModel>{
     return this.trackingList.filter(tracking => tracking.placa === placa);
   }
 
@@ -105,7 +106,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  private tracking(placa: string, poiName: string, posicoes: Array<any>): void{
+  private tracking(placa: string, poiName: string, posicoes: Array<PosicaoModel>): void{
     this.trackingList.push({
       placa: placa,
       nomePoi: poiName,
@@ -123,11 +124,11 @@ export class HomeComponent implements OnInit {
     return distance <= raio;
   }
 
-  private periodoPOI(inicio: Date, fim: Date): void{
+  private periodoPOI(inicio: Date, fim: Date): Date{
     return this.calculoTempo(inicio, fim);
   }
 
-  private calculoTempo(dataInicio: Date, dataFim: Date): void{
+  private calculoTempo(dataInicio: Date, dataFim: Date): Date{
     let delta: number = Math.abs(new Date(dataFim).getTime() - new Date(dataInicio).getTime()) / 1000;
     return [
       ['days', 24 * 60 * 60],
