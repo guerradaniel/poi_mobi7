@@ -21,3 +21,33 @@ td {
   padding: 0 16px;
   max-width: 90vw;
 }
+
+.form-div {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.mat-form-field {
+  flex: 1; 
+  margin-right: 10px; 
+}
+
+button {
+  flex: 0;
+  margin-bottom: 1rem;
+}
+
+mat-icon {
+  position: absolute;
+  float: right;
+  top: 15px;
+  right: -10px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.text-warn {
+  text-align: center;
+  color: #666666;
+}

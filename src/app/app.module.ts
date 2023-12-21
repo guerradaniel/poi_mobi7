@@ -11,17 +11,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { VeiculosService } from './services/veiculos.service';
-import { HttpClientModule } from '@angular/common/http';
 import { PoisService } from './services/pois.service';
 import { TabelaTempoVeiculoComponent } from './components/home/tabela-tempo-veiculo/tabela-tempo-veiculo.component';
 import { ConverteDataPipe } from './pipes/converte-data.pipe';
 import { FormatoPeriodoPipe } from './pipes/formato-periodo.pipe';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { FormatoPeriodoPipe } from './pipes/formato-periodo.pipe';
     MatTableModule,
     FormsModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

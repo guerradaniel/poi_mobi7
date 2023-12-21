@@ -1,34 +1,37 @@
 <mat-card class="content">
-    <table class="example-full-width">
-      <tr>
-        <td>
-          <mat-form-field appearance="outline">
-            <mat-label>Data</mat-label>
-            <input matInput [matDatepicker]="picker" [max]="maxDate" [(ngModel)]="data" name="data">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field appearance="outline">
-            <mat-label>Selecione um veículo</mat-label>
-            <mat-select [(value)]="carroEscolhido">
-              <mat-option>Todos</mat-option>
-              <mat-option *ngFor="let placa of placas" [value]="placa">
-                {{placa}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
-        <td>
-          <button mat-raised-button color="primary" (click)="consultar()">Consultar</button>
-        </td>
-      </tr>
-    </table>
+  <form [formGroup]="form" class="form" (ngSubmit)="consultar()">
+    <div class="form-div">      
+      <mat-form-field appearance="outline">
+        <mat-label>Data</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="data" name="data">
+        <mat-icon matDatepickerToggleIcon (click)="apagarData()">clear</mat-icon>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selecione um veículo</mat-label>
+        <mat-select formControlName="placa">
+          <mat-option>Todos</mat-option>
+          <mat-option *ngFor="let placa of placas" [value]="placa">
+            {{placa}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Consultar</button>
+    </div>
+  </form>
 </mat-card>
 
 <div *ngIf="trackingList.length !== 0">
   <div class="table" *ngFor="let veiculo of veiculoPorPosicao">
     <app-tabela-tempo-veiculo [tracking]="filtroTabela(veiculo.placa)"></app-tabela-tempo-veiculo>
   </div>
+</div>
+
+<div *ngIf="alertDados == true" class="text-warn">
+  <p class="text-warn">
+    Não há registros disponíveis para esta data e/ou este veículo. Por favor, tente novamente.
+  </p>
 </div>

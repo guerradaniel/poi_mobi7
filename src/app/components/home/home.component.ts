@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { PontoInteresseModel } from 'src/app/models/ponto-interesse.model';
 import { PosicaoModel } from 'src/app/models/posicao.model';
 import { ConverteDataPipe } from 'src/app/pipes/converte-data.pipe';
 import { PoisService } from 'src/app/services/pois.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
-
-import haversine from 'haversine-distance'
 import { PosicaoTabelaModel, VeiculoPosicaoModel } from 'src/app/models/posicao-tabela.model';
+import haversine from 'haversine-distance'
 
 @Component({
   selector: 'app-home',
@@ -23,18 +24,29 @@ export class HomeComponent implements OnInit {
   trackingList: Array<PosicaoTabelaModel> = [];
   carroEscolhido: string = "";
   posicaoTracked: Array<PosicaoModel> = [];
+  form!: FormGroup
+  alertDados: boolean = false;
 
   constructor(
     private veiculosService: VeiculosService,
     private poisService: PoisService,
     private converteData: ConverteDataPipe,
+    private formBuilder: FormBuilder
   ) {
     this.maxDate = new Date(Date.now());
   }
 
   ngOnInit(): void {
+    this.createForm();
     this.getPlacas();
     this.getPOI();
+  }
+
+  createForm(): void {
+    this.form = this.formBuilder.group({
+      data: '',
+      placa: ''
+    })
   }
 
   private getPlacas(): void {
@@ -52,7 +64,12 @@ export class HomeComponent implements OnInit {
 
   consultar(): void {
     this.veiculoPorPosicao = [];
-    this.getPosicaoVeiculo(this.carroEscolhido || undefined, this.data);
+    this.getPosicaoVeiculo(this.form.get('placa')?.value || undefined, this.form.get('data')?.value);
+  }
+
+  apagarData(): void{
+    this.alertDados = false;
+    this.form.get('data')?.reset();
   }
 
   public filtroTabela(placa: string): Array<PosicaoTabelaModel> {
@@ -75,6 +92,11 @@ export class HomeComponent implements OnInit {
           })
         }))
       }
+
+      if (this.veiculoPorPosicao.every(item => item.posicoes.length === 0)) {
+        this.alertDados = true;
+      }
+
       this.obterPOI();
     })
   }
@@ -139,7 +161,7 @@ export class HomeComponent implements OnInit {
       ['seconds', 1]
     ].reduce((acc: any, [key, value]) => (
       acc[key] = key == 'seconds' ?
-        (Math.floor(delta / Number(value)) >= 1 ? Math.floor(delta / Number(value)) : 1) 
+        (Math.floor(delta / Number(value)) >= 1 ? Math.floor(delta / Number(value)) : 1)
         : Math.floor(delta / Number(value)), delta -= acc[key] * Number(value), acc), {});
   }
 }
